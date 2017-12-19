@@ -123,3 +123,25 @@ describe('Lambda Callback Literals', () => {
     callback(val, 202, { 'my-header': 'val' })
   })
 })
+
+describe('Lambda Proxy Params', () => {
+  it ('should merge pathParameters and queryStringParameters', done => {
+    var event = {
+      "queryStringParameters": {
+        "unique": "unique-val",
+        "fid": "TEST-FUNCTION-UUID"
+      },
+      "pathParameters": {
+        "fid": "TEST-FUNCTION-UUID-2",
+        "new": "new-value"
+      }
+    }
+    var params = lambda.params(event)
+    expect(params).toMatchObject({
+      "unique": "unique-val",
+      "fid": "TEST-FUNCTION-UUID-2",
+      "new": "new-value"
+    })
+    done()
+  })
+})

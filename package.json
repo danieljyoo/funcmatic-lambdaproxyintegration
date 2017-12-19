@@ -1,6 +1,6 @@
 {
   "name": "funcmatic-lambdaproxyintegration",
-  "version": "1.0.0-alpha",
+  "version": "1.1.0-alpha",
   "description": "A small library that supports formatting data returned from AWS Lambda to work with API Gateway via Lambda Proxy Integration format.",
   "main": "index.js",
   "scripts": {
