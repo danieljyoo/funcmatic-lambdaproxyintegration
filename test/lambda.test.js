@@ -145,3 +145,30 @@ describe('Lambda Proxy Params', () => {
     done()
   })
 })
+
+describe('Lambda Authorized User', () => {
+  it ('should return user authorization', done => {
+    var event = {
+      "requestContext": { }
+    }
+    var user = lambda.user(event)
+    expect(user).toBeFalsy()
+    event = {
+      "requestContext": {
+        "authorizer": {
+          "claims": {
+            "sub": "MY-COGNITO-ID",
+            "email": "danieljyoo@gmail.com"
+          }
+        }
+      }
+    }
+    var user = lambda.user(event)
+    expect(user).toMatchObject({
+      userid: "MY-COGNITO-ID",
+      email: "danieljyoo@gmail.com"
+    })
+    done()
+  })
+})
+
